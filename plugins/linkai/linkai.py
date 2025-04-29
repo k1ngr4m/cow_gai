@@ -56,6 +56,8 @@ class LinkAI(Plugin):
                 return
             if context.type != ContextType.IMAGE:
                 _send_info(e_context, "正在为你加速生成摘要，请稍后")
+            if context.type == ContextType.IMAGE:
+                logger.info(f"[LinkAI] image summary, file_path={file_path}")
             app_code = self._fetch_app_code(context)
             res = LinkSummary().summary_file(file_path, app_code)
             if not res:
